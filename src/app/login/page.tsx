@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LoginForm } from "@/app/login/login-form";
+import { BrandLogo } from "@/components/brand-logo";
 import { Card } from "@/components/ui";
 
 export default async function LoginPage({
@@ -28,7 +29,7 @@ function AuthScreen({
   return (
     <div className="flex min-h-screen items-center justify-center px-6">
       <Card className="w-full max-w-md">
-        <p className="text-xs uppercase tracking-[0.16em] text-[#c9842a]">Vel-Estra</p>
+        <BrandLogo className="mb-4 text-[#163247]" />
         <h1 className="mt-2 mb-6 text-3xl">{title}</h1>
         {children}
       </Card>

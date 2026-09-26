@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { signOut } from "@/app/actions/auth";
+import { BrandLogo } from "@/components/brand-logo";
 import { Button } from "@/components/ui";
 
 const links = [
@@ -24,9 +25,7 @@ export function AppShell({
     <div className="min-h-screen">
       <header className="border-b border-[#e4d8c4] bg-[#163247] text-[#f6f1e8]">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <Link href="/dashboard" className="text-lg tracking-wide">
-            Vel-Estra
-          </Link>
+          <BrandLogo href="/dashboard" />
           <nav className="hidden gap-4 text-sm md:flex">
             {links.map((link) => (
               <Link key={link.href} href={link.href} className="opacity-90 hover:opacity-100">

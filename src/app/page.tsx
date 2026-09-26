@@ -1,11 +1,12 @@
 import Link from "next/link";
+import { BrandLogo } from "@/components/brand-logo";
 import { hasSupabaseEnv } from "@/lib/env";
 
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-[#163247] text-[#f6f1e8]">
       <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
-        <p className="text-lg tracking-wide">Vel-Estra</p>
+        <BrandLogo />
         <div className="flex gap-4 text-sm">
           <Link href="/login">Sign in</Link>
           <Link href="/signup" className="rounded-full bg-[#c9842a] px-4 py-2 text-[#163247]">
@@ -13,7 +14,8 @@ export default function HomePage() {
           </Link>
         </div>
       </header>
-      <main className="mx-auto max-w-6xl px-6 pb-20 pt-10">
+      <main className="mx-auto grid max-w-6xl items-center gap-10 px-6 pb-20 pt-6 md:grid-cols-2">
+        <div>
         <p className="text-sm uppercase tracking-[0.2em] text-[#c9842a]">
           Property intelligence
         </p>
@@ -35,7 +37,9 @@ export default function HomePage() {
             Open workspace
           </Link>
         </div>
-        <div className="mt-16 grid gap-4 md:grid-cols-3">
+        </div>
+        <BrandLogo href="/" size="lg" showWordmark={false} className="justify-center" />
+        <div className="mt-6 grid gap-4 md:col-span-2 md:grid-cols-3">
           {[
             ["Phase 1", "Single-deal analyzer with cash-on-cash, DSCR, max offer, and explanation."],
             ["Phase 2", "Pipeline, comparison, alerts, investor criteria, and a grounded advisor."],

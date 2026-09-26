@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { signUp } from "@/app/actions/auth";
+import { BrandLogo } from "@/components/brand-logo";
 import { Button, Card, Input, Label } from "@/components/ui";
 
 export default function SignupPage() {
@@ -20,7 +21,7 @@ export default function SignupPage() {
   return (
     <div className="flex min-h-screen items-center justify-center px-6">
       <Card className="w-full max-w-md">
-        <p className="text-xs uppercase tracking-[0.16em] text-[#c9842a]">Vel-Estra</p>
+        <BrandLogo className="mb-4 text-[#163247]" />
         <h1 className="mt-2 mb-6 text-3xl">Create account</h1>
         <form action={submit} className="grid gap-4">
           <div>
