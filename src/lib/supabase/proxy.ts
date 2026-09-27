@@ -44,7 +44,9 @@ export async function updateSession(request: NextRequest) {
     url.pathname = "/login";
     url.searchParams.set("next", path);
     const redirect = NextResponse.redirect(url);
-    redirect.cookies.setAll(supabaseResponse.cookies.getAll());
+    for (const cookie of supabaseResponse.cookies.getAll()) {
+      redirect.cookies.set(cookie);
+    }
     return redirect;
   }
 
