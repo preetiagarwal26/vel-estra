@@ -4,6 +4,16 @@ export function calculateFinancialMetrics(
   assumptions: DealAssumptions,
   offerPrice: number,
 ): FinancialMetrics {
+  return {
+    ...computeMetrics(assumptions, offerPrice),
+    maxOfferAtTarget: solveMaxOffer(assumptions),
+  };
+}
+
+function computeMetrics(
+  assumptions: DealAssumptions,
+  offerPrice: number,
+): Omit<FinancialMetrics, "maxOfferAtTarget"> {
   const downPayment = offerPrice * (assumptions.downPaymentPercent / 100);
   const loanAmount = offerPrice - downPayment;
   const monthlyRate = assumptions.interestRate / 100 / 12;
@@ -57,8 +67,6 @@ export function calculateFinancialMetrics(
   const grossYieldPercent =
     offerPrice > 0 ? ((assumptions.monthlyRent * 12) / offerPrice) * 100 : 0;
 
-  const maxOfferAtTarget = solveMaxOffer(assumptions);
-
   return {
     monthlyPi,
     totalMonthlyPayment,
@@ -69,7 +77,6 @@ export function calculateFinancialMetrics(
     cashOnCashPercent,
     dscr,
     grossYieldPercent,
-    maxOfferAtTarget,
     totalCashIn,
   };
 }
@@ -79,10 +86,7 @@ function solveMaxOffer(assumptions: DealAssumptions): number {
   let high = 5_000_000;
   for (let i = 0; i < 40; i++) {
     const mid = (low + high) / 2;
-    const metrics = calculateFinancialMetrics(
-      { ...assumptions, offerPrice: mid },
-      mid,
-    );
+    const metrics = computeMetrics({ ...assumptions, offerPrice: mid }, mid);
     if (metrics.cashOnCashPercent >= assumptions.minCashOnCashPercent) {
       low = mid;
     } else {
